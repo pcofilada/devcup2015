@@ -12,7 +12,8 @@ Rails.application.routes.draw do
       post 'facebook', to: 'sessions#facebook_login'
       get 'channels', to: 'channels#all_channel'
       get 'channels/:id', to: 'channels#show_channel', as: :channel
-      post 'channels/:channel_id/subscription', to: 'subscriptions#create'
+      post 'channels/:channel_id/subscriptions', to: 'subscriptions#create', as: 'subscribe'
+      put 'channels/:channel_id/subscriptions/:id', to: 'subscriptions#update', as: 'unsubscribe'
     end
   end
 end
