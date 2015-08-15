@@ -28,8 +28,9 @@ class Api::V1::SessionsController < ApplicationController
     fb_token = request.headers['Facebook-Access-Token']
     graph = Koala::Facebook::API.new(fb_token)
     profile = graph.get_object("me?fields=id,email,first_name,last_name,picture{url}")
+    old_user = User.find_by(email: profile['email'])
 
-    if User.where(email: profile['email']).exists?
+    if old_user && old_user.facebook_token.nil?
       render json: { errors: "Email already registered!" }, status: 422
       return true
     end
