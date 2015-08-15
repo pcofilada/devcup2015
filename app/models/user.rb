@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   before_create :generate_authentication_token
 
   has_many :channels, as: :owner
+  has_many :subscriptions
 
   has_attached_file :avatar, :styles => { :thumb => "50x50#" }
   validates_attachment_content_type :avatar, :content_type => /^image\/(png|jpg|jpeg)/
