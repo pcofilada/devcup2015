@@ -1,6 +1,12 @@
 class Api::V1::ChannelsController < ApplicationController
-  before_action :authenticate_with_token, except: :index
+  before_action :authenticate_with_token, only: [:create, :update]
   before_action :set_channel, only: [:update]
+
+  def show
+    channel = Channel.find(params[:id])
+
+    render json: channel, status: 200
+  end
 
   def index
     channels = User.find(params[:user_id]).channels
