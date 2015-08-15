@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815100206) do
+ActiveRecord::Schema.define(version: 20150815135157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "announcements", force: :cascade do |t|
+    t.string   "title"
+    t.string   "message"
+    t.integer  "channel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "announcements", ["channel_id"], name: "index_announcements_on_channel_id", using: :btree
 
   create_table "channels", force: :cascade do |t|
     t.string   "logo_file_name"
@@ -61,4 +71,5 @@ ActiveRecord::Schema.define(version: 20150815100206) do
   add_index "users", ["facebook_token"], name: "index_users_on_facebook_token", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "announcements", "channels"
 end
