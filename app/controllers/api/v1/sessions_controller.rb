@@ -30,7 +30,7 @@ class Api::V1::SessionsController < ApplicationController
     profile = graph.get_object("me?fields=id,email,first_name,last_name,picture{url}")
 
     if User.where(email: profile['email']).exists?
-      render json: { errors: "Email already registered!" }
+      render json: { errors: "Email already registered!" }, status: 422
       return true
     end
 
@@ -42,7 +42,7 @@ class Api::V1::SessionsController < ApplicationController
 
       render json: user, status: 200
     else
-      render json: { errors: "Unexpected error occured!" }
+      render json: { errors: "Unexpected error occured!" }, status: 422
     end
   end
 
