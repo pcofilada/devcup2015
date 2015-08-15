@@ -5,7 +5,7 @@ class Api::V1::SubscriptionsController < ApplicationController
   def create
     subscription = Subscription.new(subscription_params)
     subscription.user = current_user
-    subscriotion.channel = @channel
+    subscription.channel = @channel
 
     if subscription.save
       render json: subscription, status: 201
