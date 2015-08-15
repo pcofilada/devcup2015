@@ -35,7 +35,6 @@ class Api::V1::SessionsController < ApplicationController
     end
 
     if fb_token.present?
-      binding.pry
       user = User.facebook(fb_token, profile)
       sign_in user
       user.generate_authentication_token
