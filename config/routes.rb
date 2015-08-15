@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create, :destroy]
       post 'facebook', to: 'sessions#facebook_login'
       get :channels, to: 'channels#all_channel'
+      get 'channels/:id', to: 'channels#show_channel', as: :channel
     end
   end
 end

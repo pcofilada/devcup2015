@@ -38,6 +38,12 @@ class Api::V1::ChannelsController < ApplicationController
     render json: channels, status: 200
   end
 
+  def show_channel
+    channel = Channel.find(params[:id])
+
+    render json: channel, status: 200
+  end
+
 private
 
   def set_channel
