@@ -39,6 +39,7 @@ class Api::V1::SessionsController < ApplicationController
       user = User.facebook(fb_token, profile)
       sign_in user
       user.generate_authentication_token
+      user.facebook_token = fb_token
       user.save
 
       render json: user, status: 200

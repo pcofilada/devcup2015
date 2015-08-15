@@ -20,10 +20,9 @@ class User < ActiveRecord::Base
   end
 
   def self.facebook(token, profile)
-    where(facebook_token: token).first_or_create do |user|
+    where(email: profile['email']).first_or_create do |user|
       user.first_name = profile['first_name']
       user.last_name = profile['last_name']
-      user.email = profile['email']
       user.password = Devise.friendly_token[0, 20]
       user.avatar = proccess_uri(profile['picture']['data']['url'])
     end
