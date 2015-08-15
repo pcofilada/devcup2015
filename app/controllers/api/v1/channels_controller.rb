@@ -32,6 +32,12 @@ class Api::V1::ChannelsController < ApplicationController
     end
   end
 
+  def all_channel
+    channels = Channel.where(status: 'active').order(created_at: :desc)
+
+    render json: channels, status: 200
+  end
+
 private
 
   def set_channel

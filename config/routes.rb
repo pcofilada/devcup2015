@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       end
       resources :sessions, only: [:create, :destroy]
       post 'facebook', to: 'sessions#facebook_login'
+      get :channels, to: 'channels#all_channel'
     end
   end
 end
