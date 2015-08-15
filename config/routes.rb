@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'home#index'
   devise_for :users
   
   namespace :api, defaults: { format: :json } do
@@ -6,6 +7,9 @@ Rails.application.routes.draw do
       resources :users, only: [:create, :update] do
         resources :channels, only: [:show, :index, :create, :update] do
           resources :announcements, only: [:create]
+        end
+        member do
+          get 'subscribed', to: 'channels#subscribed_channel'
         end
       end
       resources :sessions, only: [:create, :destroy]

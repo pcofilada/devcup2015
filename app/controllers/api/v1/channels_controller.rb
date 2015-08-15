@@ -1,5 +1,5 @@
 class Api::V1::ChannelsController < ApplicationController
-  before_action :authenticate_with_token, only: [:create, :update]
+  before_action :authenticate_with_token, only: [:create, :update, :subscribed_channel]
   before_action :authenticate_private_channel, only: [:show_channel]
   before_action :set_channel, only: [:update]
 
@@ -43,6 +43,13 @@ class Api::V1::ChannelsController < ApplicationController
     channel = Channel.find(params[:id])
 
     render json: channel, status: 200
+  end
+
+  def subscribed_channel
+    channel_ids = current_user.subscriptions.pluck(:channel_id).uniq
+    channels = Channel.find(channel_ids)
+
+    render json: channels, status: 200
   end
 
 private
