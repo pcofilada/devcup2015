@@ -1,5 +1,7 @@
 class Channel < ActiveRecord::Base
   belongs_to :owner, polymorphic: true
+
+  before_save :generate_code
   
   has_many :announcements
   has_many :subscriptions
@@ -12,4 +14,12 @@ class Channel < ActiveRecord::Base
   validates :description, presence: true, length: { maximum: 140 }
   validates :status, presence: true, inclusion: { in: %w(active inactive), message: "%{value} is not a valid status." }
   validates :category, presence: true, inclusion: { in: %w(private public), message: "%{value} is not a valid category." }
+
+private
+
+  def generate_code
+    if self.category === 'private' && self.code.nil?
+      self.code = Devise.friendly_token[0, 10]
+    end
+  end
 end
