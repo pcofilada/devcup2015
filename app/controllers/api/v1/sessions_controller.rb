@@ -18,7 +18,7 @@ class Api::V1::SessionsController < ApplicationController
 
   def destroy
     user = User.find_by(auth_token: params[:id])
-    user.generated_authentication_token
+    user.generate_authentication_token
     user.save
 
     head 204
