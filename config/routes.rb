@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         resources :channels, only: [:index, :create, :update]
       end
       resources :sessions, only: [:create, :destroy]
+      post 'facebook', to: 'sessions#facebook_login'
     end
   end
 end
