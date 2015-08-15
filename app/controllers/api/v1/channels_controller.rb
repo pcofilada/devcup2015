@@ -1,5 +1,6 @@
 class Api::V1::ChannelsController < ApplicationController
   before_action :authenticate_with_token, only: [:create, :update]
+  before_action :authenticate_private_channel, only: [:show_channel]
   before_action :set_channel, only: [:update]
 
   def show
