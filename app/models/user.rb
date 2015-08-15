@@ -6,8 +6,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :first_name, :last_name, :mobile_number, :auth_token, presence: true
-  validates :auth_token, uniqueness: true
+  validates :first_name, :last_name, :mobile_number, presence: true
 
   def generate_authentication_token
     begin
