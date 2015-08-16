@@ -7,6 +7,7 @@ class Api::V1::AnnouncementsController < ApplicationController
 
     if announcement.save
       render json: announcement, status: 201
+      notify(announcement)
     else
       render json: { errors: announcement.errors.full_messages }
     end
@@ -20,6 +21,17 @@ private
 
   def announcement_params
     params.require(:announcement).permit(:title, :message)
+  end
+
+  def notify(announcement)
+    binding.pry
+    client = Chikka::Client.new(client_id: "#{Rails.application.secrets.client_id}",
+                                secret_key: "#{Rails.application.secrets.secret_key}",
+                                shortcode: "#{Rails.application.secrets.shortcode}")
+    binding.pry
+    @channel.subscriptions.sms_enabled.each do |sms|
+      client.send_message(message: announcement.message, mobile_number: "#{sms.user.mobile_number}")
+    end
   end
 
 end
