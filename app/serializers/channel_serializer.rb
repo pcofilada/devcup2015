@@ -11,4 +11,8 @@ class ChannelSerializer < ActiveModel::Serializer
   def subscribers
     "#{object.subscriptions.count}"
   end
+
+  def announcements
+    object.announcements.order(created_at: :desc)
+  end
 end
