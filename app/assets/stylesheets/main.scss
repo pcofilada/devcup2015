@@ -72,4 +72,23 @@ body {
       }
     }
   }
+
+  .previews {
+    img {
+      width: 50%;
+      position: absolute;
+    }
+
+    .first {
+      top: 0px;
+      z-index: 9;
+      right: 150px;
+    }
+
+    .second {
+      top: 70px;
+      width: 40%;
+      right: 45px;
+    }
+  }
 }
