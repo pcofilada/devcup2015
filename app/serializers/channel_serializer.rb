@@ -1,5 +1,5 @@
 class ChannelSerializer < ActiveModel::Serializer
-  attributes :id, :logo, :title, :status, :category, :description, :owner, :announcements, :subscribers, :code
+  attributes :id, :logo, :title, :status, :category, :description, :owner, :announcements, :subscribers, :code, :verified
 
   has_one :owner
   has_many :announcements

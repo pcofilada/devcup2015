@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815172908) do
+ActiveRecord::Schema.define(version: 20150816052213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,9 +37,10 @@ ActiveRecord::Schema.define(version: 20150815172908) do
     t.integer  "owner_id"
     t.string   "owner_type"
     t.string   "description"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "code"
+    t.boolean  "verified",          default: false
   end
 
   add_index "channels", ["owner_type", "owner_id"], name: "index_channels_on_owner_type_and_owner_id", using: :btree
